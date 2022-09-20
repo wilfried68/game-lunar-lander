@@ -6,13 +6,43 @@ class Game {
   start() {
     this.ground = new Ground();
     this.lander = new Lander();
+    this.attachEventListeners();
 
     //move lander
     setInterval(() => {
-        this.lander.moveDown();
-      }, 60);
+      this.lander.moveDown();
+      this.lander.speed += 1;
+    }, 2000);
 
+    setInterval(() => {
+      this.detectCollision(lander); //detect collision with lander
+    }, 1);
+  }
+
+  attachEventListeners() {
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowUp") {
+        this.lander.moveUp();
+      }
+    });
+  }
+
+  detectCollision(lander) {
+    if (
+      this.ground.positionY < this.lander.positionY + this.lander.height &&
+      this.ground.height + this.ground.positionY > this.lander.positionY
+    ) {
+      console.log("game over....");
+      location.href = "gameover.html";
     }
+  }
+
+  // removeLanderfOutside(lander){
+  //     if(lander.positionY < 0){
+  //         lander.domElement.remove(); //remove from the dom
+  //         this.lander.shift(); // remove from the array
+  //     }
+  // }
 }
 
 class Lander {
@@ -22,6 +52,7 @@ class Lander {
     this.positionX = 50 + this.width / 2;
     this.positionY = 98;
     this.domElement = null;
+    this.speed = 1;
 
     this.createDomElement();
   }
@@ -43,9 +74,15 @@ class Lander {
   }
 
   moveDown() {
-    this.positionY--;
+    this.positionY -= this.speed;
     this.domElement.style.bottom = this.positionY + "vh";
-    console.log(this.positionY--)
+    // console.log(this.positionY--)
+  }
+
+  moveUp() {
+    this.positionY += 1;
+    this.domElement.style.bottom = this.positionY + "vw";
+    console.log(this.positionY++);
   }
 }
 
