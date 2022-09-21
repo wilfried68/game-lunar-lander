@@ -2,8 +2,7 @@ class Game {
   constructor() {
     this.ground = null; // will store the bottom of the board
     this.lander = null; // will store the moving lander
-    this.refreshDelay = 60;
-    this.timeOut = null;
+    this.refreshDelay = 50;
     this.gravity = 0.01;
   }
   start() {
@@ -12,36 +11,16 @@ class Game {
     this.attachEventListeners();
 
     //move lander
-
-    // Timer
-
-    // this.moveLanderDown();
-    // this.timeOut = setTimeout(this.moveLanderDown, this.refreshDelay);
-
-    // Function that changes the timer
-
-    // Function to run at irregular intervals
-
     setInterval(() => {
-        this.lander.update(this.gravity);
-        this.detectCollision(lander); //detect collision with lander
+      this.lander.update(this.gravity);
+      this.detectCollision(lander); //detect collision with lander
     }, this.refreshDelay);
   }
-
-//   changeTimer() {
-//     this.timer = this.timer * 1.2;
-//   }
-
-//   moveLanderDown() {
-//     console.log(this.lander);
-//     this.lander.moveDown();
-//     this.changeTimer();
-//   }
 
   attachEventListeners() {
     document.addEventListener("keydown", (event) => {
       if (event.key === "ArrowUp") {
-        this.lander.moveUp();
+        this.lander.moveUp(this.gravity);
       }
     });
   }
@@ -89,13 +68,16 @@ class Lander {
     this.speed -= gravity;
     this.positionY = this.positionY + this.speed;
     this.domElement.style.bottom = this.positionY + "vh";
-    // console.log(this.positionY--)
+//    console.log(this.speed);
+
+//    console.log(this.positionY--)
   }
 
-  moveUp() {
-    this.positionY += 1;
+  moveUp(gravity) {
+    this.speed += gravity * 2;
+    this.positionY = this.positionY - this.speed;
     this.domElement.style.bottom = this.positionY + "vw";
-    console.log(this.positionY++);
+    console.log(this.speed);
   }
 }
 
