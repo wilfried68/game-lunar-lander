@@ -1,20 +1,39 @@
 body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  background-image: url("../img/stars.jpg");
 }
 
 #board {
-    height: 100vh;
-    background-color: black;
-    position: relative;
+  height: 100vh;
+  /*    background-color: black; */
+  position: relative;
 }
 
 #bottom {
-    background-color: rgb(0, 255, 38);
-    position: absolute;
+  background-color: grey;
+  position: absolute;
 }
 
 #lander {
-    background-color: rgb(255, 0, 251);
-    position: absolute;
+  background-image: url("../img/lem.png");
+  background-repeat: no-repeat;
+  background-size: 50px 50px;
+  position: absolute;
+}
+
+#speed {
+  background-color: rgb(0, 255, 38);
+  position: absolute;
+  top: 50vh;
+  left: 40vw;
+}
+
+h1, p, a {
+    color: rgb(0, 255, 38);
+    text-align: center;
+}
+
+h1 {
+    margin-top: 30vh;
 }

@@ -4,6 +4,7 @@ class Game {
     this.lander = null; // will store the moving lander
     this.refreshDelay = 50;
     this.gravity = 0.01;
+    this.speedElm = document.getElementById('speed')
   }
   start() {
     this.ground = new Ground();
@@ -14,12 +15,13 @@ class Game {
     setInterval(() => {
       this.lander.update(this.gravity);
       this.detectCollision(lander); //detect collision with lander
+      this.speedElm.innerText = this.lander.speed;
     }, this.refreshDelay);
   }
 
   attachEventListeners() {
     document.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowUp") {
+      if (event.key === " ") {
         this.lander.moveUp(this.gravity);
       }
     });
@@ -38,10 +40,10 @@ class Game {
 
 class Lander {
   constructor() {
-    this.width = 2;
-    this.height = 2;
+    this.width = 3.5;
+    this.height = 5;
     this.positionX = 50 + this.width / 2;
-    this.positionY = 98;
+    this.positionY = 93;
     this.domElement = null;
     this.speed = -0.05;
 
@@ -68,16 +70,10 @@ class Lander {
     this.speed -= gravity;
     this.positionY = this.positionY + this.speed;
     this.domElement.style.bottom = this.positionY + "vh";
-//    console.log(this.speed);
-
-//    console.log(this.positionY--)
   }
 
   moveUp(gravity) {
-    this.speed += gravity * 2;
-    this.positionY = this.positionY - this.speed;
-    this.domElement.style.bottom = this.positionY + "vw";
-    console.log(this.speed);
+    this.speed += gravity * 1.1;
   }
 }
 
